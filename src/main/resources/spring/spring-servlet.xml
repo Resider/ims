@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/jsp/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+
+    <!--    由于添加默认servlet，会导致原始的servlet注解失效，重新激活-->
+    <mvc:annotation-driven/>
+    <!-- 扫描指定目录下 素有包重注入的类 -->
+    <context:component-scan base-package="org.ims"/>
+    <context:property-placeholder ignore-unresolvable="true" location="classpath:config/application.properties"/>
+    <!-- 这个bean 取名字，名字固定就叫做multipartResolver-->
+    <bean class="org.springframework.web.multipart.commons.CommonsMultipartResolver" id="multipartResolver">
+        <!-- 限定 20 兆 -->
+        <property name="maxUploadSize" value="#{1024 * 1024 * 20}"/>
+        <!-- 默认编码 -->
+        <property name="defaultEncoding" value="UTF-8"/>
+    </bean>
+
+    <!--  静态资源处理-->
+    <mvc:default-servlet-handler/>
+
+    <!--    <bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">-->
+    <!--        <property name="exceptionMappings">-->
+    <!--            <props>-->
+    <!--                <prop key="java.lang.NullPointerException">error/404</prop>-->
+    <!--            </props>-->
+    <!--        </property>-->
+    <!--        <property name="defaultErrorView" value="error/405"></property>-->
+    <!--    </bean>-->
+
+</beans>
