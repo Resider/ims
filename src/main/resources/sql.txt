@@ -1,0 +1,75 @@
+use ims;
+
+create table ims_user (
+	id bigint(64) unsigned not null,
+	username varchar(100) not null comment '用户名',
+	`password` varchar(100) not null comment '密码',
+	type int(4) not null comment '用户类型 0普通用户 1管理员',
+	phone varchar(11) default null comment '手机号码',
+	email varchar(100) default null comment '电子邮箱',
+	fk_create_user bigint(64) default null comment '创建人',
+	create_time datetime default null comment '创建时间',
+	fk_update_user bigint(64) default null comment '修改人',
+	update_time datetime default null comment '修改时间',
+	is_deleted int(2) not null comment '是否删除 0未删除 1已删除',
+	status int(2) not null comment '状态 0禁用 1启用'
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC COMMENT='ims-用户表';
+
+create table ims_goods (
+	id bigint(64) unsigned not null,
+	goods_name varchar(100) not null comment '货物名',
+	goods_type int(4) not null comment '货物分类',
+	goods_desc varchar(255) default null comment '货物描述',
+	goods_unit varchar(255) default null comment '货物单位',
+	goods_quantity  decimal(10,2) default '0' comment '货物库存',
+	goods_price decimal(10,2) default '0' comment '货物单价',
+	goods_spec varchar(255) default null comment '货物规格型号',
+	fk_create_user bigint(64) default null comment '创建人',
+	create_time datetime default null comment '创建时间',
+	fk_update_user bigint(64) default null comment '修改人',
+	update_time datetime default null comment '修改时间',
+	is_deleted int(2) not null comment '是否删除 0未删除 1已删除',
+	status int(2) not null comment '状态 0禁用 1启用'
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC COMMENT='ims-货物表';
+
+create table ims_warehouse (
+	id bigint(64) unsigned not null,
+	warehouse_name varchar(100) not null comment '仓库名',
+	address varchar(255) not null comment '仓库地址',
+  fk_create_user bigint(64) default null comment '创建人',
+	create_time datetime default null comment '创建时间',
+	fk_update_user bigint(64) default null comment '修改人',
+	update_time datetime default null comment '修改时间',
+	is_deleted int(2) not null comment '是否删除 0未删除 1已删除',
+	status int(2) not null comment '状态 0禁用 1启用'
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC COMMENT='ims-仓库表';
+
+create table ims_supplier (
+	id bigint(64) unsigned not null,
+	supplier_name varchar(100) not null comment '供应商姓名',
+	fk_create_user bigint(64) default null comment '创建人',
+	create_time datetime default null comment '创建时间',
+	fk_update_user bigint(64) default null comment '修改人',
+	update_time datetime default null comment '修改时间',
+	is_deleted int(2) not null comment '是否删除 0未删除 1已删除',
+	status int(2) not null comment '状态 0禁用 1启用'
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC COMMENT='ims-供应商表';
+
+create table ims_record (
+	id bigint(64) unsigned not null,
+	fk_goods bigint(64) not null comment '外键-货物ID',
+	fk_warehouse bigint(64) not null comment '外键-仓库ID',
+	fk_operator bigint(64) not null comment '外键-操作用户ID',
+	fk_supplier bigint(64) not null comment '外键-供应商ID',
+	type int(2) not null comment '类型-1入库 2出库',
+	quantity decimal(10,2) default '0' comment '数量',
+	fk_create_user bigint(64) default null comment '创建人',
+	create_time datetime default null comment '创建时间',
+	fk_update_user bigint(64) default null comment '修改人',
+	update_time datetime default null comment '修改时间',
+	is_deleted int(2) not null comment '是否删除 0未删除 1已删除',
+	status int(2) not null comment '状态 0禁用 1启用'
+);
+
+
+
