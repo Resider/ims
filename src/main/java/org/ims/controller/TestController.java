@@ -28,7 +28,7 @@ public class TestController {
         String result = testService.testMethod(testParam);
         System.out.println("result = " + result);
         request.setAttribute("result", result);
-        return "test";
+        return "/home.jsp";
     }
 
 

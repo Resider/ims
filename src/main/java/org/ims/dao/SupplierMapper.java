@@ -4,6 +4,8 @@ import org.apache.ibatis.annotations.Param;
 import org.ims.pojo.entity.Supplier;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 /**
  * @author renz
  * @version 1.0
@@ -14,4 +16,6 @@ public interface SupplierMapper {
     Boolean updateSupplier(@Param("supplier") Supplier supplier);
 
     Boolean insertSupplier(@Param("supplier") Supplier supplier);
+
+    List<Supplier> supplierList();
 }

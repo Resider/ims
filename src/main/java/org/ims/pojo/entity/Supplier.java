@@ -1,6 +1,5 @@
 package org.ims.pojo.entity;
 
-import cn.hutool.core.util.ObjectUtil;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.NullSerializer;
@@ -47,7 +46,7 @@ public class Supplier implements Serializable {
     public Supplier setOperationTime(Long accountId) {
 
         Date date = new Date();
-        if (ObjectUtil.isNotEmpty(this.getId())) {
+        if (this.getId() != null) {
             this.setUpdateTime(date);
             this.setUpdateUser(accountId);
         } else {
