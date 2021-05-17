@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.ims.dao.ProductMapper">
+
+    <insert id="insertProduct">
+        insert into ims_goods
+        (id,goods_name,goods_type,goods_desc,goods_unit,goods_quantity,goods_price,goods_spec,fk_create_user,create_time,fkims_goods_update_user,update_time,is_deleted,status)
+            value
+            (#{product.id},#{product.productName},#{product.productType},#{product.productDesc},#{product.productUnit},#{product.productQuantity},#{product.productPrice},#{product.productSpec},
+            #{product.createUser},#{product.createTime},#{product.updateUser},#{product.updateTime},
+            #{product.isDeleted},#{product.status})
+    </insert>
+
+    <insert id="updateProduct">
+        update ims_supplier
+        set goods_name = #{product.productName},goods_type=#{product.productName},goods_desc=#{product.productDesc},goods_unit=#{product.productUnit},
+            goods_quantity=#{product.productQuantity},goods_price=#{product.productPrice},goods_spec=#{product.productSpec},fk_create_user = #{product.createUser},
+            create_time = #{product.createTime},fk_update_user = #{product.updateUser},update_time = #{product.updateTime},
+            is_deleted = #{product.isDeleted}, status = #{product.status}
+        where
+            id = #{product.id}
+    </insert>
+
+    <select id="productList" resultType="org.ims.pojo.entity.Product">
+        select
+            id,goods_name productName,create_time createTime
+        from ims_goods
+        where
+            is_deleted = 0
+
+    </select>
+</mapper>

@@ -7,7 +7,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Layui</title>
+    <title>IMS</title>
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -163,15 +163,15 @@
                 </dl>
 
             </li>
-            <li class="layui-nav-item layui-nav-itemed">
-                <a class="javascript:;" href="javascript:;">人员信息管理</a>
-                <dl class="layui-nav-child">
-                    <dd>
-                        <a href="/demo/">新增用户</a>
-                    </dd>
-                </dl>
+<%--            <li class="layui-nav-item layui-nav-itemed">--%>
+<%--                <a class="javascript:;" href="javascript:;">人员信息管理</a>--%>
+<%--                <dl class="layui-nav-child">--%>
+<%--                    <dd>--%>
+<%--                        <a href="/demo/">新增用户</a>--%>
+<%--                    </dd>--%>
+<%--                </dl>--%>
 
-            </li>
+<%--            </li>--%>
 
             <li class="layui-nav-item" style="height: 30px; text-align: center"></li>
         </ul>

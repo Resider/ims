@@ -165,15 +165,7 @@
                     </dl>
 
                 </li>
-                <li class="layui-nav-item layui-nav-itemed">
-                    <a class="javascript:;" href="javascript:;">人员信息管理</a>
-                    <dl class="layui-nav-child">
-                        <dd>
-                            <a href="/demo/">新增用户</a>
-                        </dd>
-                    </dl>
 
-                </li>
 
                 <li class="layui-nav-item" style="height: 30px; text-align: center"></li>
             </ul>
