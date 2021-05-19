@@ -5,7 +5,6 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.NullSerializer;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import lombok.Data;
-import org.apache.ibatis.jdbc.Null;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -25,22 +24,25 @@ public class Supplier implements Serializable {
 
     private String supplierName;
 
-    @JsonSerialize(using = ToStringSerializer.class, nullsUsing = NullSerializer.class)
+    @JsonSerialize(using = ToStringSerializer.class)
     private Long createUser;
 
     @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
     private Date createTime;
 
-    @JsonSerialize(using = ToStringSerializer.class, nullsUsing = NullSerializer.class)
+    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    @JsonSerialize(using = ToStringSerializer.class)
     private Long updateUser;
 
     @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
     private Date updateTime;
 
-    @JsonSerialize(nullsUsing = NullSerializer.class)
     private Integer isDeleted;
 
-    @JsonSerialize(nullsUsing = NullSerializer.class)
     private Integer status;
 
     public Supplier setOperationTime(Long accountId) {

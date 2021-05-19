@@ -12,19 +12,71 @@
 
     <insert id="updateSupplier">
         update ims_supplier
-        set supplier_name = #{supplier.supplierName},fk_create_user = #{supplier.createUser},
-            create_time = #{supplier.createTime},fk_update_user = #{supplier.updateUser},update_time = #{supplier.updateTime},
-            is_deleted = #{supplier.isDeleted}, status = #{supplier.status}
+        <set>
+            <if test="supplier.supplierName != null">
+                supplier_name = #{supplier.supplierName},
+            </if>
+            <if test="supplier.createUser != null">
+                fk_create_user = #{supplier.createUser},
+            </if>
+            <if test="supplier.createTime != null">
+                create_time = #{supplier.createTime},
+            </if>
+            <if test="supplier.updateTime != null">
+                update_time = #{supplier.updateTime},
+            </if>
+            <if test="supplier.isDeleted != null">
+                is_deleted = #{supplier.isDeleted},
+            </if>
+            <if test="supplier.status != null">
+                status = #{supplier.status},
+            </if>
+        </set>
         where
-            id = #{supplier.id}
+        is_deleted = 0
+        and id = #{supplier.id }
     </insert>
 
     <select id="supplierList" resultType="org.ims.pojo.entity.Supplier">
         select
-            id,supplier_name supplierName,create_time createTime
+        id,supplier_name supplierName,create_time createTime
         from ims_supplier
-        where
-        is_deleted = 0
-
+        <where>
+            is_deleted = 0
+            <if test="query.supplierName != null and query.supplierName != ''">
+                and supplier_name like concat('%',#{query.supplierName},'%')
+            </if>
+            <if test="query.minCreateTime != null and query.minCreateTime != ''">
+                and date_format(create_time,'%Y%m%d') &gt;= date_format(#{query.minCreateTime},'%Y%m%d')
+            </if>
+            <if test="query.maxCreateTime != null and query.maxCreateTime != ''">
+                and date_format(create_time,'%Y%m%d') &lt;= date_format(#{query.maxCreateTime},'%Y%m%d')
+            </if>
+            limit #{query.start},#{query.end}
+        </where>
     </select>
+
+    <select id="supplierCount" resultType="Integer">
+        select
+        count(1)
+        from ims_supplier
+        <where>
+            is_deleted = 0
+            <if test="query.supplierName != null and query.supplierName != ''">
+                and supplier_name like concat('%',#{query.supplierName},'%')
+            </if>
+            <if test="query.minCreateTime != null and query.minCreateTime != ''">
+                and date_format(create_time,'%Y%m%d') &gt;= date_format(#{query.minCreateTime},'%Y%m%d')
+            </if>
+            <if test="query.maxCreateTime != null and query.maxCreateTime != ''">
+                and date_format(create_time,'%Y%m%d') &lt;= date_format(#{query.maxCreateTime},'%Y%m%d')
+            </if>
+        </where>
+    </select>
+
+    <delete id="del">
+        delete from ims_supplier
+        where
+            id = #{id}
+    </delete>
 </mapper>

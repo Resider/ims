@@ -17,7 +17,7 @@ public class TestEntity implements Serializable {
 
     private static final long serialVersionUID = 2254030662606117202L;
 
-    @JsonSerialize(using = ToStringSerializer.class, nullsUsing = NullSerializer.class)
+    @JsonSerialize(using = ToStringSerializer.class)
     private Long id;
 
     private String name;

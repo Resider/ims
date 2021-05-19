@@ -111,7 +111,7 @@
                 <a class="javascript:;" href="javascript:;">供应商管理</a>
                 <dl class="layui-nav-child">
                     <dd>
-                        <a href="<%=path%>/supplier/supplierList" target="_self">供应商列表</a>
+                        <a href="jsp/testJsp/testSupplierList.jsp" target="_self">供应商列表</a>
                     </dd>
                 </dl>
                 <dl class="layui-nav-child">

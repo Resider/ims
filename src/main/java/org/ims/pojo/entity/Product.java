@@ -13,43 +13,41 @@ import java.util.Date;
 public class Product implements Serializable {
     private static final long serialVersionUID = -762783586988356680L;
 
-    @JsonSerialize(using = ToStringSerializer.class, nullsUsing = NullSerializer.class)
+    @JsonSerialize(using = ToStringSerializer.class)
     private Long id;
 
     private String productName;
 
-    @JsonSerialize(nullsUsing = NullSerializer.class)
     private Integer productType;
 
     private String productDesc;
 
     private String productUnit;
 
-    @JsonSerialize(using = ToStringSerializer.class, nullsUsing = NullSerializer.class)
+    @JsonSerialize(using = ToStringSerializer.class)
     private Float productQuantity;
 
-    @JsonSerialize(using = ToStringSerializer.class, nullsUsing = NullSerializer.class)
+    @JsonSerialize(using = ToStringSerializer.class)
     private Float productPrice;
 
     private String productSpec;
 
-    @JsonSerialize(using = ToStringSerializer.class, nullsUsing = NullSerializer.class)
+    @JsonSerialize(using = ToStringSerializer.class)
     private Long createUser;
 
 
     @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
     private Date createTime;
 
-    @JsonSerialize(using = ToStringSerializer.class, nullsUsing = NullSerializer.class)
+    @JsonSerialize(using = ToStringSerializer.class)
     private Long updateUser;
 
     @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
     private Date updateTime;
 
-    @JsonSerialize(nullsUsing = NullSerializer.class)
     private Integer isDeleted;
 
-    @JsonSerialize(nullsUsing = NullSerializer.class)
+
     private Integer status;
 
     public Product setOperationTime(Long accountId) {
