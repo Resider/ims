@@ -12,21 +12,72 @@
     </insert>
 
     <insert id="updateProduct">
-        update ims_supplier
-        set goods_name = #{product.productName},goods_type=#{product.productName},goods_desc=#{product.productDesc},goods_unit=#{product.productUnit},
-            goods_quantity=#{product.productQuantity},goods_price=#{product.productPrice},goods_spec=#{product.productSpec},fk_create_user = #{product.createUser},
-            create_time = #{product.createTime},fk_update_user = #{product.updateUser},update_time = #{product.updateTime},
-            is_deleted = #{product.isDeleted}, status = #{product.status}
+        update ims_goods
+        <set>
+            <if test="product.productName != null">
+                goods_name = #{product.productName},
+            </if>
+            <if test="product.createUser != null">
+                fk_create_user = #{product.createUser},
+            </if>
+            <if test="product.createTime != null">
+                create_time = #{product.createTime},
+            </if>
+            <if test="product.updateTime != null">
+                update_time = #{product.updateTime},
+            </if>
+            <if test="product.isDeleted != null">
+                is_deleted = #{product.isDeleted},
+            </if>
+            <if test="product.status != null">
+                status = #{product.status},
+            </if>
+        </set>
         where
-            id = #{product.id}
+        is_deleted = 0
+        and id = #{product.id }
     </insert>
 
     <select id="productList" resultType="org.ims.pojo.entity.Product">
         select
-            id,goods_name productName,create_time createTime
+        id,goods_name productName,create_time createTime
         from ims_goods
-        where
+        <where>
             is_deleted = 0
-
+            <if test="query.ProductName != null and query.productName != ''">
+                and goods_name like concat('%',#{query.Name},'%')
+            </if>
+            <if test="query.minCreateTime != null and query.minCreateTime != ''">
+                and date_format(create_time,'%Y%m%d') &gt;= date_format(#{query.minCreateTime},'%Y%m%d')
+            </if>
+            <if test="query.maxCreateTime != null and query.maxCreateTime != ''">
+                and date_format(create_time,'%Y%m%d') &lt;= date_format(#{query.maxCreateTime},'%Y%m%d')
+            </if>
+            limit #{query.start},#{query.end}
+        </where>
     </select>
+
+    <select id="productCount" resultType="Integer">
+        select
+        count(1)
+        from ims_goods
+        <where>
+            is_deleted = 0
+            <if test="query.productName != null and query.productName != ''">
+                and goods_name like concat('%',#{query.productName},'%')
+            </if>
+            <if test="query.minCreateTime != null and query.minCreateTime != ''">
+                and date_format(create_time,'%Y%m%d') &gt;= date_format(#{query.minCreateTime},'%Y%m%d')
+            </if>
+            <if test="query.maxCreateTime != null and query.maxCreateTime != ''">
+                and date_format(create_time,'%Y%m%d') &lt;= date_format(#{query.maxCreateTime},'%Y%m%d')
+            </if>
+        </where>
+    </select>
+
+    <delete id="del">
+        delete from ims_goods
+        where
+            id = #{id}
+    </delete>
 </mapper>

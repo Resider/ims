@@ -1,12 +1,22 @@
 package org.ims.service;
 
 import org.ims.pojo.entity.Product;
+import org.ims.pojo.query.ProductListQuery;
+import org.ims.pojo.query.SupplierListQuery;
 
 import java.util.List;
 
 public interface ProductService {
 
-    Boolean editProduct(String id,String productName);
+    Boolean editProduct(Long id,String productName);
 
-    List<Product> productList();
+    List<Product> productList(ProductListQuery query);
+
+    Boolean del(long id);
+
+    Integer productCount(ProductListQuery query);
+
+
+
+
 }

@@ -2,6 +2,8 @@ package org.ims.service.impl;
 
 import org.ims.dao.ProductMapper;
 import org.ims.pojo.entity.Product;
+import org.ims.pojo.query.ProductListQuery;
+import org.ims.pojo.query.SupplierListQuery;
 import org.ims.service.ProductService;
 import org.ims.utils.SnowFlowUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,11 +18,12 @@ public class ProductServiceImpl implements ProductService {
     private ProductMapper productMapper;
 
     @Override
-    public Boolean editProduct(String id, String productName){
+    public Boolean editProduct(Long id, String productName){
         Product product = new Product();
-        if(id != null && id != ""){
-            product.setId(Long.valueOf(id));
+        if(id != null){
+            product.setId(id);
         }
+
         product.setProductName(productName);
         Long accountId = null;
         product.setOperationTime(accountId);
@@ -36,7 +39,18 @@ public class ProductServiceImpl implements ProductService {
 
 
     @Override
-    public List<Product> productList() {
-        return null;
+    public List<Product> productList(ProductListQuery query)
+    {
+        return productMapper.productList(query);
+    }
+
+    @Override
+    public Boolean del(long id) {
+        return productMapper.del(id);
+    }
+
+    @Override
+    public Integer productCount(ProductListQuery query) {
+        return productMapper.productCount(query);
     }
 }
