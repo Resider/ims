@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
-    <title>测试页面</title>
+    <title>homepage</title>
     <meta name="decorator" content="default"/>
 </head>
 <body>

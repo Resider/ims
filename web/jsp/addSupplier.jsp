@@ -19,7 +19,7 @@
     <script type="text/javascript">
         function edit() {
             if ($("input[name='editSupplierName']").val() == '') {
-                alert("供应商姓名不可为空");
+                alert("supplier's name cannot be empty");
                 return;
             }
             var params = {
@@ -36,11 +36,11 @@
                 success: function (result) {
                     if (result != null && result) {
                         var index = parent.layer.getFrameIndex(window.name);
-                        parent.layer.msg("编辑供应商信息成功");
+                        parent.layer.msg("success!");
                         parent.layer.close(index);
                         parent.supplierListAjax();
                     } else {
-                        layer.msg("编辑供应商信息失败");
+                        layer.msg("failure!");
                     }
                 }
             });
@@ -53,17 +53,17 @@
     <div class="layui-input-block">
         <form class="layui-form" action="javascript:;">
             <div class="layui-form-item">
-                <label class="layui-form-label">供应商名称</label>
+                <label class="layui-form-label">Supplier's Name</label>
                 <div class="layui-input-block">
                     <input type="hidden" name="id">
-                    <input type="text" name="editSupplierName" required lay-verify="required" placeholder="请输入供应商名称"
+                    <input type="text" name="editSupplierName" required lay-verify="required" placeholder=""
                            autocomplete="off" class="layui-input">
                 </div>
             </div>
             <div class="layui-form-item">
                 <div class="layui-input-block">
-                    <button class="layui-btn" type="button" onclick="edit()">立即提交</button>
-                    <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                    <button class="layui-btn" type="button" onclick="edit()">submit</button>
+                    <button type="reset" class="layui-btn layui-btn-primary">reset</button>
                 </div>
             </div>
         </form>

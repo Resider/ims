@@ -44,8 +44,6 @@ public class ProductController {
 //    }
 
 
-
-
     @RequestMapping("/productListAjax")
     @ResponseBody
     public PageDTO productListAjax(@RequestBody ProductListAjaxRequest request) {

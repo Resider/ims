@@ -17,13 +17,26 @@
     <script type="text/javascript" src="../static/layui/layui.js"></script>
     <script type="text/javascript" src="../static/jquery/jquery-1.9.1.min.js"></script>
     <script type="text/javascript">
-        // jquery 开局执行的方法
         var pageIndex = 0;
         var pageCount = 0;
         var pageSum = 0;
         $(function () {
             firstLoad();
         });
+
+        function loadDateTool() {
+            layui.use('laydate', function () {
+                var laydate = layui.laydate;
+                laydate.render({
+                    elem: '#test1-1'
+                    , lang: 'en'
+                });
+                laydate.render({
+                    elem: '#test1-2'
+                    , lang: 'en'
+                });
+            })
+        }
 
         function loadPageTool() {
             layui.use(['laypage', 'layer'], function () {
@@ -45,6 +58,7 @@
         }
 
         function firstLoad() {
+            loadDateTool();
             $.ajax({
                 type: "POST",
                 url: "<%=path%>/supplier/supplierListAjax",
@@ -53,13 +67,11 @@
                 data: "{}",
                 success: function (result) {
                     if (result != null && result.data != null) {
-                        // 当前页数
+
                         pageIndex = result.pageIndex;
                         pageCount = result.pageCount;
                         pageSum = result.pageSum;
-                        // // 总条数和总页数
-                        // $("#pageCount").html(result.pageCount);
-                        // $("#pageSum").html(result.pageSum);
+
                         loadPageTool();
 
                         $("#tbody").html("");
@@ -69,8 +81,8 @@
                                 "<td>" + item.supplierName + "</td>" +
                                 "<td>" + item.createTime + "</td>" +
                                 "<td>" +
-                                "<button type='button' onclick='del(" + JSON.stringify(item.id) + ")'>删除</button>" +
-                                "&nbsp;<button type='button' onclick='update(" + JSON.stringify(item) + ")'>修改</button>" +
+                                "<button type='button' onclick='del(" + JSON.stringify(item.id) + ")'>delete</button>" +
+                                "&nbsp;<button type='button' onclick='update(" + JSON.stringify(item) + ")'>update</button>" +
                                 "</td></tr>";
                         });
                         $("#tbody").append(content);
@@ -101,7 +113,7 @@
                 success: function (result) {
                     if (result != null && result.data != null) {
                         var oriPageSum = pageSum;
-                        // 当前页数
+
                         pageIndex = result.pageIndex;
                         pageCount = result.pageCount;
                         pageSum = result.pageSum;
@@ -116,8 +128,8 @@
                                 "<td>" + item.supplierName + "</td>" +
                                 "<td>" + item.createTime + "</td>" +
                                 "<td>" +
-                                "<button type='button' onclick='del(" + JSON.stringify(item.id) + ")'>删除</button>" +
-                                "&nbsp;<button type='button' onclick='update(" + JSON.stringify(item) + ")'>修改</button>" +
+                                "<button type='button' onclick='del(" + JSON.stringify(item.id) + ")'>delete</button>" +
+                                "&nbsp;<button type='button' onclick='update(" + JSON.stringify(item) + ")'>update</button>" +
                                 "</td></tr>";
                         });
                         $("#tbody").append(content);
@@ -131,8 +143,8 @@
             // loadPageTool();
         }
 
-        function reflush() {
-            $("#query input").val("");      // 将查询框里的查询条件清空
+        function reset() {
+            $("#query input").val("");
             supplierListAjax();
             // loadPageTool();
         }
@@ -146,15 +158,15 @@
         }
 
         function del(id) {
-            if (confirm("确认删除id:" + id + "供应商吗")) {
+            if (confirm("Are you sure to delete it")) {
                 console.log(id);
                 $.post("<%=path%>/supplier/del", {"id": id}, function (result) {
                     if (result) {
-                        alert("删除成功");
+                        alert("success");
                         supplierListAjax();
                         loadPageTool();
                     } else {
-                        alert("删除失败");
+                        alert("failure");
                     }
                 })
             }
@@ -162,7 +174,7 @@
 
         function edit() {
             if ($("input[name='editSupplierName']").val() == '') {
-                alert("供应商姓名不可为空");
+                alert("supplier's name cannot be empty");
                 return;
             }
             var params = {
@@ -181,7 +193,7 @@
                         supplierListAjax();
                         loadPageTool();
                     } else {
-                        alert("新增或修改供应商信息失败");
+                        alert("failure");
                     }
                 }
             });
@@ -199,31 +211,36 @@
                     <%----%>
                     <div class="layui-form-item" id="query">
                         <div class="layui-inline">
-                            <label class="layui-form-label">供应商名称</label>
+                            <label class="layui-form-label">supplier's Name</label>
                             <div class="layui-input-inline">
                                 <input type="text" class="layui-input" name="supplierName"
                                        value="${query.supplierName}">
                             </div>
-                            <label class="layui-form-label">登记日期</label>
+                            <label class="layui-form-label">create date</label>
                             <div class="layui-input-inline">
-                                <input name="minCreateTime" type="date" class="layui-input"
-                                       value="${query.minCreateTime}"/>
+                                <%--                                <input name="minCreateTime" type="date" class="layui-input"--%>
+                                <%--                                       value="${query.minCreateTime}"/>--%>
+                                <input type="text" class="layui-input" id="test1-1" name="minCreateTime"
+                                       placeholder="yyyy-MM-dd"
+                                       value="${query. minCreateTime}">
                             </div>
                             <div class="layui-form-mid">-</div>
                             <div class="layui-input-inline">
-                                <input name="maxCreateTime" type="date" class="layui-input"
-                                       value="${query. maxCreateTime}"/>
+                                <%--                                <input name="maxCreateTime" type="date" class="layui-input"--%>
+                                <%--                                       value="${query. maxCreateTime}"/>--%>
+                                <input type="text" class="layui-input" id="test1-2" name="maxCreateTime"
+                                       placeholder="yyyy-MM-dd"
+                                       value="${query.maxCreateTime}">
                             </div>
                             <label class="layui-form-label"> </label>
                             <button type="button" class="layui-btn layui-btn-normal"
-                                    onclick="search()">查询
+                                    onclick="search()">search
                             </button>
-                            <button type="button" class="layui-btn layui-btn-normal" onclick="reflush()">重置</button>
-                            <button type="button" class="layui-btn layui-btn-normal" onclick="add()">新增</button>
+                            <button type="button" class="layui-btn layui-btn-normal" onclick="reset()">reset</button>
+                            <button type="button" class="layui-btn layui-btn-normal" onclick="add()">new</button>
                         </div>
                     </div>
                     <%----%>
-
 
                     <table class="layui-table" aria-colspan="3">
                         <colgroup>
@@ -233,10 +250,10 @@
                         </colgroup>
                         <thead>
                         <tr>
-                            <th>序号</th>
-                            <th>供应商名称</th>
-                            <th>登记日期</th>
-                            <th>操作</th>
+                            <th>No</th>
+                            <th>supplier's name</th>
+                            <th>create date</th>
+                            <th>operate</th>
                         </tr>
                         </thead>
                         <tbody id="tbody">
@@ -265,10 +282,10 @@
         function add() {
             layer.open({
                 type: 2,
-                title: '很多时候，我们想最大化看，比如像这个页面。',
+                title: 'add',
                 shadeClose: true,
                 shade: false,
-                maxmin: true, //开启最大化最小化按钮
+                maxmin: true,
                 area: ['893px', '600px'],
                 content: '../jsp/addSupplier.jsp'
             });

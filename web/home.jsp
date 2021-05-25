@@ -24,54 +24,28 @@
         <div class="layui-form component" lay-filter="LAY-site-header-component"></div>
         <ul class="layui-nav">
             <li class="layui-nav-item ">
-                <a href="/doc/">文档</a>
+                <a href="/doc/">doc</a>
             </li>
             <li class="layui-nav-item layui-this">
-                <a href="/demo/">示例</a>
-            </li>
-
-            <li class="layui-nav-item">
-                <a href="javascript:;">
-                    <!--<span class="layui-badge-dot" style="left:0; right: auto; margin: -4px 0 0 5px;"></span>-->
-                    周边
-                </a>
-                <dl class="layui-nav-child layui-nav-child-c">
-                    <dd class="layui-hide-sm layui-show-xs" lay-unselect>
-                        <a href="https://gitee.com/sentsin/layui/issues" target="_self" rel="nofollow">问题反馈</a>
-                        <hr>
-                    </dd>
-
-                    <dd lay-unselect><a href="/alone.html" target="_blank" lay-unselect>独立组件</a></dd>
-                    <dd lay-unselect><a href="//fly.layui.com/extend/" target="_blank">扩展组件</a></dd>
-
-
-                    <!--
-                    <dd lay-unselect>
-                      <a href="https://fly.layui.com/jump/txyhot/" target="_blank" id="layui-spm-event-aliyun">
-                        腾讯云特惠
-                        <span class="layui-badge-dot" style="margin-top: -5px;"></span>
-                      </a>
-                    </dd>
-                    -->
-                </dl>
+                <a href="/demo/">demo</a>
             </li>
 
             <li class="layui-nav-item layui-hide-xs">
-                <a href="//gitee.com/sentsin/layui/issues" target="_blank" rel="nofollow">反馈</a>
+                <a href="javascript:;" target="_blank" rel="nofollow">issues</a>
             </li>
 
         </ul>
     </div>
 </div>
 
-<!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
+
 <div class="layui-side layui-bg-black">
     <div class="layui-side-scroll">
 
         <ul class="layui-nav layui-nav-tree site-demo-nav">
 
             <li class="layui-nav-item layui-nav-itemed">
-                <a class="javascript:;" href="javascript:;">人员信息管理</a>
+                <a class="javascript:;" href="javascript:;">User Manager</a>
                 <dl class="layui-nav-child">
                     <dd>
                         <a href="/demo/">新增用户</a>
@@ -170,12 +144,10 @@
     </div>
 </div>
 </div>
-<!-- aaaaaaaaaaaaaaa -->
+
 <div class="layui-tab layui-tab-brief" lay-filter="demoTitle">
     <ul class="layui-tab-title site-demo-title">
-        <li class="layui-this">预览</li>
-        <li>查看代码</li>
-        <li>帮助</li>
+        <li></li>
     </ul>
     <div id="body_div" class="layui-body layui-tab-content site-demo site-demo-body">
         <iframe name="body_iframe" id="body_iframe" scrolling="no" height="875px" width="1300px"/>
