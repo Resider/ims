@@ -2,7 +2,6 @@ package org.ims.controller;
 
 import org.ims.pojo.DTO.PageDTO;
 import org.ims.pojo.entity.Supplier;
-import org.ims.pojo.entity.TestEntity;
 import org.ims.pojo.query.SupplierListQuery;
 import org.ims.pojo.request.EditSupplierRequest;
 import org.ims.pojo.request.SupplierListAjaxRequest;
@@ -14,9 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -78,14 +74,14 @@ public class SupplierController {
         if (request.getPageSize() != null) {
             page.setPageSize(request.getPageSize());
         } else {
-            page.setPageSize(5);
+            page.setPageSize(10);
         }
         SupplierListQuery query = new SupplierListQuery();
         query.setSupplierName(request.getSupplierName());
         query.setMinCreateTime(request.getMinCreateTime());
         query.setMaxCreateTime(request.getMaxCreateTime());
         Integer start = (page.getPageIndex() - 1) * page.getPageSize();
-        Integer end = page.getPageSize() * page.getPageIndex();
+        Integer end = page.getPageSize();
         query.setStart(start);
         query.setEnd(end);
         List<Supplier> list = supplierService.supplierList(query);

@@ -111,7 +111,7 @@
                 <a class="javascript:;" href="javascript:;">供应商管理</a>
                 <dl class="layui-nav-child">
                     <dd>
-                        <a href="jsp/testJsp/testSupplierList.jsp" target="_self">供应商列表</a>
+                        <a href="jsp/supplierList.jsp" target="body_iframe">供应商列表</a>
                     </dd>
                 </dl>
                 <dl class="layui-nav-child">
@@ -163,15 +163,6 @@
                 </dl>
 
             </li>
-<%--            <li class="layui-nav-item layui-nav-itemed">--%>
-<%--                <a class="javascript:;" href="javascript:;">人员信息管理</a>--%>
-<%--                <dl class="layui-nav-child">--%>
-<%--                    <dd>--%>
-<%--                        <a href="/demo/">新增用户</a>--%>
-<%--                    </dd>--%>
-<%--                </dl>--%>
-
-<%--            </li>--%>
 
             <li class="layui-nav-item" style="height: 30px; text-align: center"></li>
         </ul>
@@ -187,7 +178,7 @@
         <li>帮助</li>
     </ul>
     <div id="body_div" class="layui-body layui-tab-content site-demo site-demo-body">
-        <iframe name="body_iframe" id="body_iframe" scrolling="no" height="100%" width="100%"/>
+        <iframe name="body_iframe" id="body_iframe" scrolling="no" height="875px" width="1300px"/>
     </div>
 </div>
 <script type="text/javascript">

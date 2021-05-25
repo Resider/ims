@@ -160,8 +160,8 @@
         <tr>
             <td><a href="javascript:;" onclick="prePage()">上一页</a></td>
             <td><a href="javascript:;" onclick="nextPage()">下一页</a></td>
-            <td>共<span id="pageCount"></span>页</td>
-            <td>共<span id="pageSum"></span>条</td>
+            <td>共<span id="pageSum"></span>页</td>
+            <td>共<span id="pageCount"></span>条</td>
         </tr>
     </table>
     <br/>

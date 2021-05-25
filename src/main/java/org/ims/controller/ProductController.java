@@ -2,13 +2,9 @@ package org.ims.controller;
 
 import org.ims.pojo.DTO.PageDTO;
 import org.ims.pojo.entity.Product;
-import org.ims.pojo.entity.Supplier;
 import org.ims.pojo.query.ProductListQuery;
-import org.ims.pojo.query.SupplierListQuery;
 import org.ims.pojo.request.EditProductRequest;
-import org.ims.pojo.request.EditSupplierRequest;
 import org.ims.pojo.request.ProductListAjaxRequest;
-import org.ims.pojo.request.SupplierListAjaxRequest;
 import org.ims.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,8 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 @Controller("ProductController")
