@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.ims.dao.UserMapper">
+
+    <select id="login" resultType="org.ims.pojo.entity.User">
+       select
+            username,password,type,phone,
+            email,fk_create_user createUser,create_time createTime,
+            fk_update_user updateUser,update_time updateTime,
+            is_deleted isDeleted,status
+        from ims_user
+        where
+            is_deleted = 0
+            and username = #{username}
+    </select>
+</mapper>

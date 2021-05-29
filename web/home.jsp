@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%
     String path = request.getContextPath();
-    String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+    String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
 %>
 <!DOCTYPE html>
 <html>
@@ -16,133 +16,134 @@
 </head>
 <body>
 <div class="layui-layout layui-layout-admin">
-<div class="layui-header header header-demo" summer>
-    <div class="layui-fluid">
-        <a class="logo" href="static/image/home/logo.png">
-            <img src="static/image/home/logo.png" alt="layui">
-        </a>
-        <div class="layui-form component" lay-filter="LAY-site-header-component"></div>
-        <ul class="layui-nav">
-            <li class="layui-nav-item ">
-                <a href="/doc/">doc</a>
-            </li>
-            <li class="layui-nav-item layui-this">
-                <a href="/demo/">demo</a>
-            </li>
+    <div class="layui-header header header-demo" summer>
+        <div class="layui-fluid">
+            <a class="logo" href="static/image/home/logo.png">
+                <img src="static/image/home/logo.png" alt="layui">
+            </a>
+            <div class="layui-form component" lay-filter="LAY-site-header-component"></div>
+            <ul class="layui-nav">
+                <li class="layui-nav-item ">
+                    <a href="/doc/">doc</a>
+                </li>
+                <li class="layui-nav-item layui-this">
+                    <a href="/demo/">demo</a>
+                </li>
 
-            <li class="layui-nav-item layui-hide-xs">
-                <a href="javascript:;" target="_blank" rel="nofollow">issues</a>
-            </li>
+                <li class="layui-nav-item layui-hide-xs">
+                    <a href="javascript:;" target="_blank" rel="nofollow">issues</a>
+                </li>
 
-        </ul>
+            </ul>
+        </div>
     </div>
-</div>
 
 
-<div class="layui-side layui-bg-black">
-    <div class="layui-side-scroll">
+    <div class="layui-side layui-bg-black">
+        <div class="layui-side-scroll">
 
-        <ul class="layui-nav layui-nav-tree site-demo-nav">
+            <ul class="layui-nav layui-nav-tree site-demo-nav">
 
-            <li class="layui-nav-item layui-nav-itemed">
-                <a class="javascript:;" href="javascript:;">User Manager</a>
-                <dl class="layui-nav-child">
-                    <dd>
-                        <a href="/demo/">新增用户</a>
-                    </dd>
-                </dl>
-                <dl class="layui-nav-child">
-                    <dd>
-                        <a href="/demo/">修改用户</a>
-                    </dd>
-                </dl>
-                <dl class="layui-nav-child">
-                    <dd>
-                        <a href="/demo/">变更密码</a>
-                    </dd>
-                </dl>
-            </li>
+                <li class="layui-nav-item layui-nav-itemed">
+                    <a class="javascript:;" href="javascript:;">User Manager</a>
+                    <dl class="layui-nav-child">
+                        <dd>
+                            <a href="/demo/">新增用户</a>
+                        </dd>
+                    </dl>
+                    <dl class="layui-nav-child">
+                        <dd>
+                            <a href="/demo/">修改用户</a>
+                        </dd>
+                    </dl>
+                    <dl class="layui-nav-child">
+                        <dd>
+                            <a href="/demo/">变更密码</a>
+                        </dd>
+                    </dl>
+                </li>
 
-            <li class="layui-nav-item layui-nav-itemed">
-                <a class="javascript:;" href="javascript:;">货物管理</a>
-                <dl class="layui-nav-child">
-                    <dd>
-                        <a href="/demo/">货物列表</a>
-                    </dd>
-                </dl>
-                <dl class="layui-nav-child">
-                    <dd>
-                        <a href="/demo/">新增货物</a>
-                    </dd>
-                </dl>
-                <dl class="layui-nav-child">
-                    <dd>
-                        <a href="/demo/">修改货物</a>
-                    </dd>
-                </dl>
-            </li>
-            <li class="layui-nav-item layui-nav-itemed">
-                <a class="javascript:;" href="javascript:;">供应商管理</a>
-                <dl class="layui-nav-child">
-                    <dd>
-                        <a href="jsp/supplierList.jsp" target="body_iframe">供应商列表</a>
-                    </dd>
-                </dl>
-                <dl class="layui-nav-child">
-                    <dd>
-                        <a href="/demo/">新增供应商</a>
-                    </dd>
-                </dl>
-                <dl class="layui-nav-child">
-                    <dd>
-                        <a href="/demo/">修改供应商</a>
-                    </dd>
-                </dl>
+                <li class="layui-nav-item layui-nav-itemed">
+                    <a class="javascript:;" href="javascript:;">货物管理</a>
+                    <dl class="layui-nav-child">
+                        <dd>
+                            <a href="/demo/">货物列表</a>
+                        </dd>
+                    </dl>
+                    <dl class="layui-nav-child">
+                        <dd>
+                            <a href="/demo/">新增货物</a>
+                        </dd>
+                    </dl>
+                    <dl class="layui-nav-child">
+                        <dd>
+                            <a href="/demo/">修改货物</a>
+                        </dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item layui-nav-itemed">
+                    <a class="javascript:;" href="javascript:;">供应商管理</a>
+                    <dl class="layui-nav-child">
+                        <dd>
+                            <a href="jsp/supplierList.jsp" target="body_iframe">供应商列表</a>
+                        </dd>
+                    </dl>
+                    <dl class="layui-nav-child">
+                        <dd>
+                            <a href="/demo/">新增供应商</a>
+                        </dd>
+                    </dl>
+                    <dl class="layui-nav-child">
+                        <dd>
+                            <a href="/demo/">修改供应商</a>
+                        </dd>
+                    </dl>
 
-            </li><li class="layui-nav-item layui-nav-itemed">
-            <a class="javascript:;" href="javascript:;">库存管理</a>
-            <dl class="layui-nav-child">
-                <dd>
-                    <a href="/demo/">库存列表</a>
-                </dd>
-            </dl>
-            <dl class="layui-nav-child">
-                <dd>
-                    <a href="/demo/">入库</a>
-                </dd>
-            </dl>
-            <dl class="layui-nav-child">
-                <dd>
-                    <a href="/demo/">出库</a>
-                </dd>
-            </dl>
-            <dl class="layui-nav-child">
-                <dd>
-                    <a href="/demo/">统计</a>
-                </dd>
-            </dl>
-            <dl class="layui-nav-child">
-                <dd>
-                    <a href="/demo/">出、入库记录</a>
-                </dd>
-            </dl>
+                </li>
+                <li class="layui-nav-item layui-nav-itemed">
+                    <a class="javascript:;" href="javascript:;">库存管理</a>
+                    <dl class="layui-nav-child">
+                        <dd>
+                            <a href="/demo/">库存列表</a>
+                        </dd>
+                    </dl>
+                    <dl class="layui-nav-child">
+                        <dd>
+                            <a href="/demo/">入库</a>
+                        </dd>
+                    </dl>
+                    <dl class="layui-nav-child">
+                        <dd>
+                            <a href="/demo/">出库</a>
+                        </dd>
+                    </dl>
+                    <dl class="layui-nav-child">
+                        <dd>
+                            <a href="/demo/">统计</a>
+                        </dd>
+                    </dl>
+                    <dl class="layui-nav-child">
+                        <dd>
+                            <a href="/demo/">出、入库记录</a>
+                        </dd>
+                    </dl>
 
-        </li>
-            <li class="layui-nav-item layui-nav-itemed">
-                <a class="javascript:;" href="javascript:;">系统管理</a>
-                <dl class="layui-nav-child">
-                    <dd>
-                        <a href="/demo/">数据字典</a>
-                    </dd>
-                </dl>
+                </li>
+                <li class="layui-nav-item layui-nav-itemed">
+                    <a class="javascript:;" href="javascript:;">系统管理</a>
+                    <dl class="layui-nav-child">
+                        <dd>
+                            <a href="/demo/">数据字典</a>
+                        </dd>
+                    </dl>
 
-            </li>
+                </li>
 
-            <li class="layui-nav-item" style="height: 30px; text-align: center"></li>
-        </ul>
+                <li class="layui-nav-item" style="height: 30px; text-align: center"></li>
+            </ul>
 
+        </div>
     </div>
-</div>
 </div>
 
 <div class="layui-tab layui-tab-brief" lay-filter="demoTitle">
