@@ -9,7 +9,6 @@ import java.util.List;
 
 public interface ProductService {
 
-    Boolean editProduct(Long id,String productName);
 
     List<Product> productList(ProductListQuery query);
 
@@ -17,5 +16,5 @@ public interface ProductService {
 
     Integer productCount(ProductListQuery query);
 
-
+    Boolean editProduct(EditProductRequest request);
 }

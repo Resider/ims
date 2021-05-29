@@ -18,25 +18,6 @@ public class ProductServiceImpl implements ProductService {
     @Autowired
     private ProductMapper productMapper;
 
-    @Override
-    public Boolean editProduct(Long id, String productName){
-        Product product = new Product();
-        if(id != null){
-            product.setId(id);
-        }
-
-        product.setProductName(productName);
-        Long accountId = null;
-        product.setOperationTime(accountId);
-        product.setStatus(1);
-        product.setIsDeleted(0);
-        if(product.getId() != null){
-            return productMapper.updateProduct(product);
-        }
-        SnowFlowUtil snowFlowUtil = new SnowFlowUtil.Factory().create(5,4);
-        product.setId(snowFlowUtil.nextId());
-        return productMapper.insertProduct(product);
-    }
 
 
 
@@ -55,4 +36,28 @@ public class ProductServiceImpl implements ProductService {
     public Integer productCount(ProductListQuery query) {
         return productMapper.productCount(query);
     }
+
+    @Override
+    public Boolean editProduct(EditProductRequest request) {
+        Long id = request.getId();
+        String productName = request.getProductName();
+        Product product = new Product();
+        if(id != null){
+            product.setId(id);
+        }
+        product.setProductName(productName);
+        Long accountId = null;
+        product.setOperationTime(accountId);
+        product.setStatus(1);
+        product.setIsDeleted(0);
+        if(product.getId() != null){
+            return productMapper.updateProduct(product);
+        }
+        SnowFlowUtil snowFlowUtil = new SnowFlowUtil.Factory().create(5,4);
+        product.setId(snowFlowUtil.nextId());
+        return productMapper.insertProduct(product);
+
+
+    }
+
 }

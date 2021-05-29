@@ -7,4 +7,12 @@ public class EditProductRequest {
     private Long id;
 
     private String productName;
+
+    private Integer productType;
+
+    private Float productQuantity;
+
+    private String productSpec;
+
+    private String productUnit;
 }

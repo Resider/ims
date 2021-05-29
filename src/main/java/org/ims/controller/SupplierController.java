@@ -41,20 +41,7 @@ public class SupplierController {
         return supplierService.del(id);
     }
 
- /*   @RequestMapping("/supplierList")
-    public String supplierList(String testParam, HttpServletRequest request, HttpServletResponse response) {
-        String supplierName = request.getParameter("supplierName");
-        String minCreateTime = request.getParameter("minCreateTime");
-        String maxCreateTime = request.getParameter("maxCreateTime");
-        SupplierListQuery query = new SupplierListQuery();
-        query.setSupplierName(supplierName);
-        query.setMinCreateTime(minCreateTime);
-        query.setMaxCreateTime(maxCreateTime);
-        List<Supplier> list = supplierService.supplierList(query);
-        request.setAttribute("list", list);
-        request.setAttribute("query", query);
-        return "testJsp/testSupplierList";
-    }*/
+
 
     @RequestMapping("/supplierListAjax")
     @ResponseBody
