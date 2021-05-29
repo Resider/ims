@@ -1,11 +1,12 @@
 package org.ims.controller;
 
+import lombok.AllArgsConstructor;
 import org.ims.pojo.DTO.PageDTO;
-import org.ims.pojo.entity.Product;
-import org.ims.pojo.query.ProductListQuery;
-import org.ims.pojo.request.EditProductRequest;
-import org.ims.pojo.request.ProductListAjaxRequest;
-import org.ims.service.ProductService;
+import org.ims.pojo.entity.Warehouse;
+import org.ims.pojo.query.WarehouseListQuery;
+import org.ims.pojo.request.EditWarehouseRequest;
+import org.ims.pojo.request.WarehouseAjaxRequest;
+import org.ims.service.WarehouseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,34 +16,30 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 
-@Controller("ProductController")
-@RequestMapping(value = "/product")
-public class ProductController {
+@RequestMapping(value = "/warehouse")
+@Controller("WarehouseController")
+@AllArgsConstructor
+public class WarehouseController {
+
     @Autowired
-    private ProductService productService;
+    private WarehouseService warehouseService;
 
-
-    @RequestMapping("/editProduct")
+    @RequestMapping("/editWarehouse")
     @ResponseBody
-    public Boolean editProduct(@RequestBody EditProductRequest request) {
+    public Boolean editWarehouse(@RequestBody EditWarehouseRequest request){
 
-        return productService.editProduct(request);
+        return warehouseService.editWarehouse(request);
+
     }
 
     @RequestMapping("/del")
     @ResponseBody
-    public Boolean del(@RequestParam("id") Long id) {
-        return productService.del(id);
-    }
+    public Boolean del(@RequestParam("id") Long id){return warehouseService.del(id);}
 
-
-
-
-
-    @RequestMapping("/productListAjax")
+    @RequestMapping("/warehouseListAjax")
     @ResponseBody
-    public PageDTO productListAjax(@RequestBody ProductListAjaxRequest request) {
-        // 创建分页的对象类 前端传来页码和页容量,若没有传则认为是第一次打开网页,应显示第一页,默认一页五条数据
+    public PageDTO warehouseListAjax(@RequestBody WarehouseAjaxRequest request) {
+
         PageDTO page = new PageDTO();
         if (request.getPageIndex() != null) {
             if (request.getPageIndex() <= 1) {
@@ -59,22 +56,20 @@ public class ProductController {
         } else {
             page.setPageSize(5);
         }
-        ProductListQuery query = new ProductListQuery();
-        query.setProductName(request.getProductName());
+        WarehouseListQuery query = new WarehouseListQuery();
+        query.setWarehouseName(request.getWarehouseName());
         query.setMinCreateTime(request.getMinCreateTime());
         query.setMaxCreateTime(request.getMaxCreateTime());
         Integer start = (page.getPageIndex() - 1) * page.getPageSize();
         Integer end = page.getPageSize() * page.getPageIndex();
         query.setStart(start);
         query.setEnd(end);
-        List<Product> list = productService.productList(query);
-        // 查询总条数,计算分页的总条数和总页数
-        Integer count = productService.productCount(query);
-        Integer sum = count % page.getPageSize() == 0 ? count / page.getPageSize() : count / page.getPageSize() + 1; // 三元运算符
+        List<Warehouse> list = warehouseService.warehouseList(query);
+        Integer count = warehouseService.warehouseCount(query);
+        Integer sum = count % page.getPageSize() == 0 ? count / page.getPageSize() : count / page.getPageSize() + 1;
         page.setData(list);
         page.setPageCount(count);
         page.setPageSum(sum);
         return page;
     }
-
 }
