@@ -5,11 +5,14 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.NullSerializer;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 
 @Data
+@Accessors(chain = true)
 public class Product implements Serializable {
     private static final long serialVersionUID = -762783586988356680L;
 
@@ -18,17 +21,17 @@ public class Product implements Serializable {
 
     private String productName;
 
-    private Integer productType;
+    private String productType;
 
     private String productDesc;
 
     private String productUnit;
 
     @JsonSerialize(using = ToStringSerializer.class)
-    private Float productQuantity;
+    private BigDecimal productQuantity;
 
     @JsonSerialize(using = ToStringSerializer.class)
-    private Float productPrice;
+    private BigDecimal productPrice;
 
     private String productSpec;
 
@@ -61,9 +64,5 @@ public class Product implements Serializable {
             this.setCreateUser(accountId);
         }
         return this;
-    }
-
-
-    public void setProductName(String productName) {
     }
 }

@@ -5,8 +5,11 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.NullSerializer;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import lombok.Data;
+import lombok.experimental.Accessors;
+import org.apache.ibatis.jdbc.Null;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 
 /**
@@ -15,13 +18,14 @@ import java.util.Date;
  * @date 2021/5/29 12:03
  */
 @Data
+@Accessors(chain = true)
 public class Record implements Serializable {
 
     @JsonSerialize(using = ToStringSerializer.class, nullsUsing = NullSerializer.class)
     private Long id;
 
     @JsonSerialize(using = ToStringSerializer.class, nullsUsing = NullSerializer.class)
-    private Long goodId;
+    private Long productId;
 
     @JsonSerialize(using = ToStringSerializer.class, nullsUsing = NullSerializer.class)
     private Long warehouseId;
@@ -31,6 +35,12 @@ public class Record implements Serializable {
 
     @JsonSerialize(using = ToStringSerializer.class, nullsUsing = NullSerializer.class)
     private Long supplierId;
+
+    @JsonSerialize(nullsUsing = NullSerializer.class)
+    private Integer type;
+
+    @JsonSerialize(nullsUsing = NullSerializer.class)
+    private BigDecimal quantity;
 
     @JsonSerialize(using = ToStringSerializer.class)
     private Long createUser;

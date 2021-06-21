@@ -3,6 +3,7 @@ package org.ims.dao;
 import org.apache.ibatis.annotations.Param;
 import org.ims.pojo.entity.Supplier;
 import org.ims.pojo.query.SupplierListQuery;
+import org.ims.pojo.vo.SupplierSelectVO;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -23,4 +24,8 @@ public interface SupplierMapper {
     Boolean del(@Param("id") Long id);
 
     Integer supplierCount(@Param("query") SupplierListQuery query);
+
+    List<SupplierSelectVO> selectList();
+
+    Supplier supplierDetail(@Param("id") Long id);
 }

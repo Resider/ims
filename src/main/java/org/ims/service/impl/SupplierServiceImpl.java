@@ -6,6 +6,7 @@ import org.ims.dao.SupplierMapper;
 import org.ims.pojo.entity.Supplier;
 import org.ims.pojo.query.SupplierListQuery;
 import org.ims.pojo.request.EditSupplierRequest;
+import org.ims.pojo.vo.SupplierSelectVO;
 import org.ims.service.SupplierService;
 import org.ims.utils.SnowFlowUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,6 +57,16 @@ public class SupplierServiceImpl implements SupplierService {
 
     @Override
     public Integer supplierCount(SupplierListQuery query) {
-        return  supplierMapper.supplierCount(query);
+        return supplierMapper.supplierCount(query);
+    }
+
+    @Override
+    public List<SupplierSelectVO> selectList() {
+        return supplierMapper.selectList();
+    }
+
+    @Override
+    public Supplier supplierDetail(Long id) {
+        return supplierMapper.supplierDetail(id);
     }
 }

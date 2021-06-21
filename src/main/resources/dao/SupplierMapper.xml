@@ -13,7 +13,7 @@
     <insert id="updateSupplier">
         update ims_supplier
         <set>
-            <if test="supplier.supplierName != null">
+            <if test="supplier.supplierName != null and supplier.supplierName != ''">
                 supplier_name = #{supplier.supplierName},
             </if>
             <if test="supplier.createUser != null">
@@ -79,4 +79,21 @@
         where
             id = #{id}
     </delete>
+
+    <select id="selectList" resultType="org.ims.pojo.vo.SupplierSelectVO">
+        select
+            id,supplier_name title
+        from ims_supplier
+        where
+            is_deleted = 0
+    </select>
+
+    <select id="supplierDetail" resultType="org.ims.pojo.entity.Supplier">
+        select
+            id,supplier_name supplierName
+        from ims_supplier
+        where
+            is_deleted = 0
+            and id = #{id}
+    </select>
 </mapper>

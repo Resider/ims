@@ -2,10 +2,12 @@ package org.ims.controller;
 
 import lombok.AllArgsConstructor;
 import org.ims.pojo.DTO.PageDTO;
+import org.ims.pojo.entity.Supplier;
 import org.ims.pojo.entity.Warehouse;
 import org.ims.pojo.query.WarehouseListQuery;
 import org.ims.pojo.request.EditWarehouseRequest;
 import org.ims.pojo.request.WarehouseAjaxRequest;
+import org.ims.pojo.vo.WarehouseSelectVO;
 import org.ims.service.WarehouseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,11 +16,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @RequestMapping(value = "/warehouse")
 @Controller("WarehouseController")
-@AllArgsConstructor
 public class WarehouseController {
 
     @Autowired
@@ -26,7 +28,7 @@ public class WarehouseController {
 
     @RequestMapping("/editWarehouse")
     @ResponseBody
-    public Boolean editWarehouse(@RequestBody EditWarehouseRequest request){
+    public Boolean editWarehouse(@RequestBody EditWarehouseRequest request) {
 
         return warehouseService.editWarehouse(request);
 
@@ -34,7 +36,9 @@ public class WarehouseController {
 
     @RequestMapping("/del")
     @ResponseBody
-    public Boolean del(@RequestParam("id") Long id){return warehouseService.del(id);}
+    public Boolean del(@RequestParam("id") Long id) {
+        return warehouseService.del(id);
+    }
 
     @RequestMapping("/warehouseListAjax")
     @ResponseBody
@@ -58,8 +62,7 @@ public class WarehouseController {
         }
         WarehouseListQuery query = new WarehouseListQuery();
         query.setWarehouseName(request.getWarehouseName());
-        query.setMinCreateTime(request.getMinCreateTime());
-        query.setMaxCreateTime(request.getMaxCreateTime());
+        query.setAddress(request.getAddress());
         Integer start = (page.getPageIndex() - 1) * page.getPageSize();
         Integer end = page.getPageSize() * page.getPageIndex();
         query.setStart(start);
@@ -71,5 +74,20 @@ public class WarehouseController {
         page.setPageCount(count);
         page.setPageSum(sum);
         return page;
+    }
+
+    @RequestMapping("/selectList")
+    @ResponseBody
+    public List<WarehouseSelectVO> selectList() {
+        return warehouseService.selectList();
+    }
+
+
+    @RequestMapping("/warehouseDetail")
+    public String warehouseDetail(HttpServletRequest request){
+        String id = request.getParameter("id");
+        Warehouse warehouse = warehouseService.warehouseDetail(Long.valueOf(id));
+        request.setAttribute("warehouse",warehouse);
+        return "addWarehouse";
     }
 }

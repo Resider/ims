@@ -4,10 +4,12 @@ import org.ims.dao.WarehouseMapper;
 import org.ims.pojo.entity.Warehouse;
 import org.ims.pojo.query.WarehouseListQuery;
 import org.ims.pojo.request.EditWarehouseRequest;
+import org.ims.pojo.vo.WarehouseSelectVO;
 import org.ims.service.WarehouseService;
 import org.ims.utils.SnowFlowUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -33,28 +35,38 @@ public class WarehouseServiceImpl implements WarehouseService {
         return warehouseMapper.warehouseCount(query);
     }
 
+    @Transactional(rollbackFor = Exception.class)
     @Override
     public Boolean editWarehouse(EditWarehouseRequest request) {
         Long id = request.getId();
         String warehouseName = request.getWarehouseName();
+        String setWarehouseAddress = request.getAddress();
         Warehouse warehouse = new Warehouse();
-
-        if(id!=null){
+        if (id != null) {
             warehouse.setId(id);
         }
-
         warehouse.setWarehouseName(warehouseName);
+        warehouse.setAddress( setWarehouseAddress);
         Long accountID = null;
         warehouse.setOperationTime(accountID);
         warehouse.setStatus(1);
         warehouse.setIsDeleted(0);
-        if(warehouse.getId()!=null){
+        if (warehouse.getId() != null) {
             return warehouseMapper.updateWarehouse(warehouse);
         }
-        SnowFlowUtil snowFlowUtil = new SnowFlowUtil.Factory().create(5,4);
+        SnowFlowUtil snowFlowUtil = new SnowFlowUtil.Factory().create(5, 4);
         warehouse.setId(snowFlowUtil.nextId());
 
+        return warehouseMapper.insertWarehouse(warehouse);
+    }
 
-        return warehouseMapper.insertProduct(warehouse);
+    @Override
+    public List<WarehouseSelectVO> selectList() {
+        return warehouseMapper.selectList();
+    }
+
+    @Override
+    public Warehouse warehouseDetail(Long id) {
+        return warehouseMapper.warehouseDetail(id);
     }
 }

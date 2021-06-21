@@ -5,6 +5,7 @@ import org.ims.pojo.entity.Supplier;
 import org.ims.pojo.query.SupplierListQuery;
 import org.ims.pojo.request.EditSupplierRequest;
 import org.ims.pojo.request.SupplierListAjaxRequest;
+import org.ims.pojo.vo.SupplierSelectVO;
 import org.ims.service.SupplierService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -40,7 +42,6 @@ public class SupplierController {
     public Boolean del(@RequestParam("id") Long id) {
         return supplierService.del(id);
     }
-
 
 
     @RequestMapping("/supplierListAjax")
@@ -81,5 +82,17 @@ public class SupplierController {
         return page;
     }
 
+    @RequestMapping("/selectList")
+    @ResponseBody
+    public List<SupplierSelectVO> selectList() {
+        return supplierService.selectList();
+    }
 
+    @RequestMapping("/supplierDetail")
+    public String supplierDetail(HttpServletRequest request){
+        String id = request.getParameter("id");
+        Supplier supplier = supplierService.supplierDetail(Long.valueOf(id));
+        request.setAttribute("supplier",supplier);
+        return "addSupplier";
+    }
 }

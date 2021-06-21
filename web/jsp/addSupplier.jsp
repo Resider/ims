@@ -55,8 +55,8 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">Supplier's Name</label>
                 <div class="layui-input-block">
-                    <input type="hidden" name="id">
-                    <input type="text" name="editSupplierName" required lay-verify="required" placeholder=""
+                    <input type="hidden" name="id" value="${supplier.id}">
+                    <input type="text" name="editSupplierName" required lay-verify="required" placeholder="" value="${supplier.supplierName}"
                            autocomplete="off" class="layui-input">
                 </div>
             </div>

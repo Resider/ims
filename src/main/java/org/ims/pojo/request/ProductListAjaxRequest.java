@@ -7,6 +7,8 @@ public class ProductListAjaxRequest {
 
     private String productName;
 
+    private String productType;
+
     private String minCreateTime;
 
     private String maxCreateTime;

@@ -10,4 +10,6 @@ public class EditWarehouseRequest {
 
     private String warehouseName;
 
+    private String address;
+
 }

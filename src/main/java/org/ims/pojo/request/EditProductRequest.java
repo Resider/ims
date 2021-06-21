@@ -2,17 +2,24 @@ package org.ims.pojo.request;
 
 import lombok.Data;
 
+import java.math.BigDecimal;
+
 @Data
 public class EditProductRequest {
     private Long id;
 
     private String productName;
 
-    private Integer productType;
+    private String productType;
 
-    private Float productQuantity;
+    private String productDesc;
+
+    private String productUnit;
+
+    private BigDecimal productQuantity;
+
+    private BigDecimal productPrice;
 
     private String productSpec;
 
-    private String productUnit;
 }

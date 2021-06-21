@@ -7,9 +7,7 @@ public class WarehouseAjaxRequest {
 
     private String warehouseName;
 
-    private String minCreateTime;
-
-    private String maxCreateTime;
+    private String address;
 
     private Integer pageSize;
 

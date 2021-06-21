@@ -10,14 +10,15 @@ import java.util.Date;
 
 @Data
 public class Warehouse implements Serializable {
-    private static final long serialVersionUID = -762783586988356680L;
+
+    private static final long serialVersionUID = -4265159073801004531L;
 
     @JsonSerialize(using = ToStringSerializer.class)
     private Long id;
 
     private String warehouseName;
 
-    private String warehouseAddress;
+    private String address;
 
     @JsonSerialize(using = ToStringSerializer.class)
     private Long createUser;

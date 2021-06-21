@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.ims.dao.RecordMapper">
+
+    <insert id="insertRecord">
+        insert into ims_record(
+        id,
+        fk_goods,
+        fk_warehouse,
+        fk_operator,
+        fk_supplier,
+        `type`,
+        quantity,
+        fk_create_user,
+        create_time,
+        fk_update_user,
+        update_time,
+        is_deleted,
+        status)
+        value(
+        #{record.id},
+        #{record.productId},
+        #{record.warehouseId},
+        #{record.operatorId},
+        #{record.supplierId},
+        #{record.type},
+        #{record.quantity},
+        #{record.createUser},
+        #{record.createTime},
+        #{record.updateUser},
+        #{record.updateTime},
+        #{record.isDeleted},
+        #{record.status})
+    </insert>
+
+    <select id="recordPageCount" resultType="Integer">
+        select
+            count(1)
+        from ims_record
+        where
+            is_deleted = 0
+    </select>
+
+    <resultMap id="recordPageMap" type="org.ims.pojo.vo.RecordPageVO">
+        <id column="id" property="id"/>
+        <result column="type" property="type"/>
+        <result column="quantity" property="quantity"/>
+        <result column="username" property="operator"/>
+        <result column="create_time" property="createTime"/>
+        <association property="product" javaType="org.ims.pojo.entity.Product" columnPrefix="p_">
+            <result column="id" property="id"/>
+            <result column="productName" property="productName"/>
+            <result column="productUnit" property="productUnit"/>
+            <result column="productQuantity" property="productQuantity"/>
+        </association>
+        <association property="warehouse" javaType="org.ims.pojo.entity.Warehouse" columnPrefix="w_">
+            <result column="id" property="id"/>
+            <result column="warehouseName" property="warehouseName"/>
+        </association>
+        <association property="supplier" javaType="org.ims.pojo.entity.Supplier" columnPrefix="s_">
+            <result column="id" property="id"/>
+            <result column="supplierName" property="supplierName"/>
+        </association>
+    </resultMap>
+
+    <select id="recordPage" resultMap="recordPageMap">
+        select
+                t2.id p_id,t2.goods_name p_productName,t2.goods_unit p_productUnit,
+                t2.goods_quantity p_productQuantity,
+                t3.id w_id,t3.warehouse_name w_warehouseName,
+                t4.id s_id,t4.supplier_name s_supplierName,
+                t1.type, t1.quantity,t1.id,t5.username,t1.create_time
+        from ims_record t1
+        left join ims_goods t2
+        on t2.is_deleted = 0 and t2.id = t1.fk_goods
+        left join ims_warehouse t3
+        on t3.is_deleted = 0 and t3.id = t1.fk_warehouse
+        left join ims_supplier t4
+        on t4.is_deleted = 0 and t4.id = t1.fk_supplier
+        left join ims_user t5
+        on t5.is_deleted = 0 and t5.id = t1.fk_operator
+        where
+            t1.is_deleted = 0
+            order by t1.create_time desc
+            limit #{query.start},#{query.end}
+    </select>
+</mapper>

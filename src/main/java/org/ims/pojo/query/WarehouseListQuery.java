@@ -7,6 +7,8 @@ public class WarehouseListQuery {
 
     private String warehouseName;
 
+    private String address;
+
     private String minCreateTime;
 
     private String maxCreateTime;

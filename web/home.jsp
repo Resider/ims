@@ -1,8 +1,11 @@
+<%@ page import="org.springframework.web.context.request.SessionScope" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
     String path = request.getContextPath();
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
 %>
+<% if (request.getSession().getAttribute("user") == null) response.sendRedirect("/ims/login.jsp");%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,16 +26,22 @@
             </a>
             <div class="layui-form component" lay-filter="LAY-site-header-component"></div>
             <ul class="layui-nav">
-                <li class="layui-nav-item ">
-                    <a href="/doc/">doc</a>
-                </li>
-                <li class="layui-nav-item layui-this">
-                    <a href="/demo/">demo</a>
-                </li>
+                <%--                <li class="layui-nav-item ">--%>
+                <%--                    <a href="/doc/">doc</a>--%>
+                <%--                </li>--%>
+                <c:if test="${not empty sessionScope.user.username}">
+                    <li class="layui-nav-item layui-this">
+                        <a href="javascript:;">${sessionScope.user.username}</a>
+                    </li>
+                    <li class="layui-nav-item">
+                        <a href="<%=path%>/user/logout">log out</a>
+                    </li>
+                </c:if>
 
-                <li class="layui-nav-item layui-hide-xs">
-                    <a href="javascript:;" target="_blank" rel="nofollow">issues</a>
-                </li>
+
+                <%--                <li class="layui-nav-item layui-hide-xs">--%>
+                <%--                    <a href="javascript:;" target="_blank" rel="nofollow">issues</a>--%>
+                <%--                </li>--%>
 
             </ul>
         </div>
@@ -48,17 +57,7 @@
                     <a class="javascript:;" href="javascript:;">User Manager</a>
                     <dl class="layui-nav-child">
                         <dd>
-                            <a href="/demo/">新增用户</a>
-                        </dd>
-                    </dl>
-                    <dl class="layui-nav-child">
-                        <dd>
-                            <a href="/demo/">修改用户</a>
-                        </dd>
-                    </dl>
-                    <dl class="layui-nav-child">
-                        <dd>
-                            <a href="/demo/">变更密码</a>
+                            <a href="jsp/userList.jsp" target="body_iframe">用户管理</a>
                         </dd>
                     </dl>
                 </li>
@@ -67,17 +66,7 @@
                     <a class="javascript:;" href="javascript:;">货物管理</a>
                     <dl class="layui-nav-child">
                         <dd>
-                            <a href="/demo/">货物列表</a>
-                        </dd>
-                    </dl>
-                    <dl class="layui-nav-child">
-                        <dd>
-                            <a href="/demo/">新增货物</a>
-                        </dd>
-                    </dl>
-                    <dl class="layui-nav-child">
-                        <dd>
-                            <a href="/demo/">修改货物</a>
+                            <a href="jsp/productionList.jsp" target="body_iframe">货物列表</a>
                         </dd>
                     </dl>
                 </li>
@@ -88,52 +77,30 @@
                             <a href="jsp/supplierList.jsp" target="body_iframe">供应商列表</a>
                         </dd>
                     </dl>
+                </li>
+                <li class="layui-nav-item layui-nav-itemed">
+                    <a class="javascript:;" href="javascript:;">仓库管理</a>
                     <dl class="layui-nav-child">
                         <dd>
-                            <a href="/demo/">新增供应商</a>
+                            <a href="jsp/warehouseList.jsp" target="body_iframe">仓库列表</a>
                         </dd>
                     </dl>
-                    <dl class="layui-nav-child">
-                        <dd>
-                            <a href="/demo/">修改供应商</a>
-                        </dd>
-                    </dl>
-
                 </li>
                 <li class="layui-nav-item layui-nav-itemed">
                     <a class="javascript:;" href="javascript:;">库存管理</a>
                     <dl class="layui-nav-child">
                         <dd>
-                            <a href="/demo/">库存列表</a>
+                            <a href="jsp/enterRecord.jsp" target="body_iframe">入库、出库</a>
                         </dd>
                     </dl>
+                    <%--  <dl class="layui-nav-child">
+                          <dd>
+                              <a href="/demo/">统计</a>
+                          </dd>
+                      </dl>--%>
                     <dl class="layui-nav-child">
                         <dd>
-                            <a href="/demo/">入库</a>
-                        </dd>
-                    </dl>
-                    <dl class="layui-nav-child">
-                        <dd>
-                            <a href="/demo/">出库</a>
-                        </dd>
-                    </dl>
-                    <dl class="layui-nav-child">
-                        <dd>
-                            <a href="/demo/">统计</a>
-                        </dd>
-                    </dl>
-                    <dl class="layui-nav-child">
-                        <dd>
-                            <a href="/demo/">出、入库记录</a>
-                        </dd>
-                    </dl>
-
-                </li>
-                <li class="layui-nav-item layui-nav-itemed">
-                    <a class="javascript:;" href="javascript:;">系统管理</a>
-                    <dl class="layui-nav-child">
-                        <dd>
-                            <a href="/demo/">数据字典</a>
+                            <a href="jsp/RecordList.jsp" target="body_iframe">出、入库记录</a>
                         </dd>
                     </dl>
 

@@ -1,6 +1,12 @@
 package org.ims.dao;
 
+import org.apache.ibatis.annotations.Param;
+import org.ims.pojo.entity.Record;
+import org.ims.pojo.query.ProductListQuery;
+import org.ims.pojo.vo.RecordPageVO;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 /**
  * @author renz
@@ -9,4 +15,9 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface RecordMapper {
+    int insertRecord(@Param("record") Record record);
+
+    List<RecordPageVO> recordPage(@Param("query") ProductListQuery query);
+
+    Integer recordPageCount(@Param("query") ProductListQuery query);
 }

@@ -43,7 +43,7 @@
                 var laypage = layui.laypage, layer = layui.layer;
                 laypage.render({
                     elem: 'layPage'
-                    , count: (pageSum * 10)
+                    , count: (pageCount)
                     , layout: ['count', 'prev', 'page', 'next',/* 'limit',*/ 'refresh', 'skip']
                     , jump: function (obj, first) {
                         if (!first) {
@@ -113,11 +113,12 @@
                 success: function (result) {
                     if (result != null && result.data != null) {
                         var oriPageSum = pageSum;
+                        var oriPageCount = pageCount;
 
                         pageIndex = result.pageIndex;
                         pageCount = result.pageCount;
                         pageSum = result.pageSum;
-                        if (oriPageSum != result.pageSum) {
+                        if (oriPageCount != result.pageCount) {
                             loadPageTool();
                         }
 
@@ -147,14 +148,6 @@
             $("#query input").val("");
             supplierListAjax();
             // loadPageTool();
-        }
-
-        function update(item) {
-            var id = item.id;
-            var supplierName = item.supplierName;
-            alert(id + supplierName);
-            $("input[name='id']").val(id);
-            $("input[name='editSupplierName']").val(supplierName);
         }
 
         function del(id) {
@@ -288,6 +281,18 @@
                 maxmin: true,
                 area: ['893px', '600px'],
                 content: '../jsp/addSupplier.jsp'
+            });
+        }
+        function update(item) {
+            var id = item.id;
+            layer.open({
+                type: 2,
+                title: 'update',
+                shadeClose: true,
+                shade: false,
+                maxmin: true,
+                area: ['893px', '600px'],
+                content: '<%=path%>/supplier/supplierDetail?id='+id
             });
         }
 

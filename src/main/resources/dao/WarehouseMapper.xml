@@ -4,9 +4,9 @@
 
     <insert id="insertWarehouse">
         insert into ims_warehouse
-        (id,warehouse_name,address,fk_create_user,create_time,fkims_goods_update_user,update_time,is_deleted,status)
+        (id,warehouse_name,address,fk_create_user,create_time,fk_update_user,update_time,is_deleted,status)
             value
-            (#{warehouse.id},#{warehouse.warehouseName},#{warehouse.createUser},#{warehouse.createTime},#{warehouse.updateUser},#{warehouse.updateTime},
+            (#{warehouse.id},#{warehouse.warehouseName},#{warehouse.address},#{warehouse.createUser},#{warehouse.createTime},#{warehouse.updateUser},#{warehouse.updateTime},
             #{warehouse.isDeleted},#{warehouse.status})
     </insert>
 
@@ -45,12 +45,15 @@
 
     <select id="warehouseList" resultType="org.ims.pojo.entity.Warehouse">
         select
-        id,warehouse_name warehouseName,create_time createTime
+        id,warehouse_name warehouseName,address,create_time createTime
         from ims_warehouse
         <where>
             is_deleted = 0
             <if test="query.warehouseName != null and query.warehouseName != ''">
-                and warehouse_name like concat('%',#{query.Name},'%')
+                and warehouse_name like concat('%',#{query.warehouseName},'%')
+            </if>
+            <if test="query.address != null and query.address != ''">
+                and address like concat('%',#{query.address},'%')
             </if>
             <if test="query.minCreateTime != null and query.minCreateTime != ''">
                 and date_format(create_time,'%Y%m%d') &gt;= date_format(#{query.minCreateTime},'%Y%m%d')
@@ -85,4 +88,21 @@
         where
             id = #{id}
     </delete>
+
+    <select id="selectList" resultType="org.ims.pojo.vo.WarehouseSelectVO">
+        select
+            id,warehouse_name title
+        from ims_warehouse
+        where
+            is_deleted = 0
+    </select>
+
+    <select id="warehouseDetail" resultType="org.ims.pojo.entity.Warehouse">
+        select
+            id,warehouse_name warehouseName,address
+        from ims_warehouse
+        where
+            is_deleted = 0
+            and id = #{id}
+    </select>
 </mapper>

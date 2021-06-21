@@ -3,6 +3,7 @@ package org.ims.service;
 import org.ims.pojo.entity.Supplier;
 import org.ims.pojo.query.SupplierListQuery;
 import org.ims.pojo.request.EditSupplierRequest;
+import org.ims.pojo.vo.SupplierSelectVO;
 
 import java.util.List;
 
@@ -23,4 +24,8 @@ public interface SupplierService {
 
     // 分页总条数
     Integer supplierCount(SupplierListQuery query);
+
+    List<SupplierSelectVO> selectList();
+
+    Supplier supplierDetail(Long id);
 }

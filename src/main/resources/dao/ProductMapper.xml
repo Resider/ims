@@ -4,7 +4,7 @@
 
     <insert id="insertProduct">
         insert into ims_goods
-        (id,goods_name,goods_type,goods_desc,goods_unit,goods_quantity,goods_price,goods_spec,fk_create_user,create_time,fkims_goods_update_user,update_time,is_deleted,status)
+        (id,goods_name,goods_type,goods_desc,goods_unit,goods_quantity,goods_price,goods_spec,fk_create_user,create_time,fk_update_user,update_time,is_deleted,status)
             value
             (#{product.id},#{product.productName},#{product.productType},#{product.productDesc},#{product.productUnit},#{product.productQuantity},#{product.productPrice},#{product.productSpec},
             #{product.createUser},#{product.createTime},#{product.updateUser},#{product.updateTime},
@@ -14,26 +14,26 @@
     <update id="updateProduct">
         update ims_goods
         <set>
-            <if test="product.productName != null">
+            <if test="product.productName != null and product.productName != ''">
                 goods_name = #{product.productName},
             </if>
             <if test="product.productQuantity != null">
-                goods_quantity= #{product.productQuantity},
+                goods_quantity = #{product.productQuantity},
             </if>
-            <if test="product.productType != null">
-                goods_quantity= #{product.productType},
+            <if test="product.productType != null and product.productType != ''">
+                goods_type = #{product.productType},
             </if>
-            <if test="product.productDesc != null">
-                goods_quantity= #{product.productDesc},
+            <if test="product.productDesc != null and product.productDesc != ''">
+                goods_desc = #{product.productDesc},
             </if>
             <if test="product.productPrice != null">
-                goods_price= #{product.productPrice},
+                goods_price = #{product.productPrice},
             </if>
-            <if test="product.productUnit != null">
-                goods_Unit= #{product.productUnit},
+            <if test="product.productUnit != null and product.productUnit != ''">
+                goods_unit = #{product.productUnit},
             </if>
-            <if test="product.productSpec != null">
-                goods_Spec= #{product.productSpec},
+            <if test="product.productSpec != null and product.productSpec != ''">
+                goods_spec= #{product.productSpec},
             </if>
             <if test="product.createUser != null">
                 fk_create_user = #{product.createUser},
@@ -53,17 +53,23 @@
         </set>
         where
         is_deleted = 0
-        and id = #{product.id }
+        and id = #{product.id}
     </update>
 
     <select id="productList" resultType="org.ims.pojo.entity.Product">
         select
-        id,goods_name productName,create_time createTime
+        id,goods_name productName,create_time createTime,
+        goods_type productType,goods_desc productDesc,
+        goods_unit productUnit,goods_quantity productQuantity,
+        goods_price productPrice,goods_spec productSpec
         from ims_goods
         <where>
             is_deleted = 0
-            <if test="query.ProductName != null and query.productName != ''">
-                and goods_name like concat('%',#{query.Name},'%')
+            <if test="query.productName != null and query.productName != ''">
+                and goods_name like concat('%',#{query.productName},'%')
+            </if>
+            <if test="query.productType != null and query.productType != ''">
+                and goods_type = #{query.productType}
             </if>
             <if test="query.minCreateTime != null and query.minCreateTime != ''">
                 and date_format(create_time,'%Y%m%d') &gt;= date_format(#{query.minCreateTime},'%Y%m%d')
@@ -90,6 +96,9 @@
             <if test="query.maxCreateTime != null and query.maxCreateTime != ''">
                 and date_format(create_time,'%Y%m%d') &lt;= date_format(#{query.maxCreateTime},'%Y%m%d')
             </if>
+            <if test="query.productType != null and query.productType != ''">
+                and goods_type = #{query.productType}
+            </if>
         </where>
     </select>
 
@@ -98,4 +107,24 @@
         where
             id = #{id}
     </delete>
+
+    <select id="selectList" resultType="org.ims.pojo.vo.ProductSelectVO">
+        select
+            id,goods_name title
+        from ims_goods
+        where
+            is_deleted = 0
+    </select>
+
+    <select id="detail" resultType="org.ims.pojo.entity.Product">
+        select
+            id,goods_name productName,goods_type productType,
+            goods_desc productDesc,goods_unit productUnit,
+            goods_quantity productQuantity,goods_price productPrice,
+            goods_spec productSpec
+            from ims_goods
+            where
+                is_deleted = 0
+                and id = #{id}
+    </select>
 </mapper>

@@ -3,12 +3,16 @@ package org.ims.service.impl;
 import cn.hutool.core.lang.Assert;
 import org.ims.dao.UserMapper;
 import org.ims.pojo.entity.User;
+import org.ims.pojo.query.UserListQuery;
+import org.ims.pojo.request.EditUserRequest;
 import org.ims.service.UserService;
+import org.ims.utils.SnowFlowUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 /**
  * @author renz
@@ -41,5 +45,54 @@ public class UserServiceImpl implements UserService {
             session.setAttribute("msg", "the password is wrong!");
         }
         return "loginJump";
+    }
+
+    @Override
+    public String logout(HttpServletRequest req) {
+        HttpSession session = req.getSession();
+        session.setAttribute("user", null);
+        return "logoutJump";
+    }
+
+    @Override
+    public List<User> userList(UserListQuery query) {
+        return userMapper.userList(query);
+    }
+
+    @Override
+    public Integer userCount(UserListQuery query) {
+        return userMapper.userCount(query);
+    }
+
+    @Override
+    public Boolean editUser(EditUserRequest request) {
+        Long id = request.getId();
+        User user = new User();
+        user.setUsername(request.getUsername())
+                .setPassword(request.getPassword())
+                .setPhone(request.getPhone())
+                .setEmail(request.getEmail())
+                .setId(id)
+                .setType(0)
+                .setStatus(1)
+                .setIsDeleted(0);
+        Long accountId = null;
+        user.setOperationTime(accountId);
+        if (user.getId() != null) {
+            return userMapper.updateUser(user);
+        }
+        SnowFlowUtil snowFlowUtil = new SnowFlowUtil.Factory().create(5, 4);
+        user.setId(snowFlowUtil.nextId());
+        return userMapper.insertUser(user);
+    }
+
+    @Override
+    public User userDetail(Long id) {
+        return userMapper.userDetail(id);
+    }
+
+    @Override
+    public Boolean del(Long id) {
+        return userMapper.del(id);
     }
 }

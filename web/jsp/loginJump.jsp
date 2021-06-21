@@ -14,7 +14,7 @@
 <p>${msg}</p>
 <p>${user.username}</p>
 <c:if test="${sessionScope.get('user') != null}">
-    <a href="../home.jsp">返回首页</a>
+    <a href="../home.jsp">home page</a>
 </c:if>
 </body>
 </html>
