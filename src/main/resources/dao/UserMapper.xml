@@ -23,7 +23,7 @@
 
     <select id="userList" resultType="org.ims.pojo.entity.User">
         select
-            id,username,`password`,phone,email
+        id,username,`password`,phone,email,`type`
         from ims_user
         <where>
             is_deleted = 0
@@ -60,6 +60,9 @@
             <if test="user.email != null and user.email != ''">
                 email = #{user.email},
             </if>
+            <if test="user.type != null">
+                `type` = #{user.type},
+            </if>
 
             <if test="user.createUser != null">
                 fk_create_user = #{user.createUser},
@@ -85,7 +88,7 @@
 
     <select id="userDetail" resultType="org.ims.pojo.entity.User">
         select
-             id,username,`password`,phone,email
+             id,username,`password`,phone,email,`type`
         from ims_user
         where is_deleted = 0
         and id = #{id}

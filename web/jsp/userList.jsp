@@ -77,9 +77,16 @@
                         $("#tbody").html("");
                         var content = "";
                         $.each(result.data, function (index, item) {
+                            var typeStr = "";
+                            if (item.type === 0) {
+                                typeStr = "user";
+                            } else {
+                                typeStr = "manager";
+                            }
                             content += "<tr><td>" + (index + 1) + "</td>" +
                                 "<td>" + item.username + "</td>" +
                                 "<td>******</td>" +
+                                "<td>" + typeStr + "</td>" +
                                 "<td>" + item.phone + "</td>" +
                                 "<td>" + item.email + "</td>" +
                                 "<td>" +
@@ -125,9 +132,16 @@
                         $("#tbody").html("");
                         var content = "";
                         $.each(result.data, function (index, item) {
+                            var typeStr = "";
+                            if (item.type === 0) {
+                                typeStr = "user";
+                            } else {
+                                typeStr = "manager";
+                            }
                             content += "<tr><td>" + (index + 1) + "</td>" +
                                 "<td>" + item.username + "</td>" +
                                 "<td>******</td>" +
+                                "<td>" + typeStr + "</td>" +
                                 "<td>" + item.phone + "</td>" +
                                 "<td>" + item.email + "</td>" +
                                 "<td>" +
@@ -187,13 +201,13 @@
                                        value="${query.userName}">
                             </div>
 
-                                <label class="layui-form-label"> </label>
-                                <button type="button" class="layui-btn layui-btn-normal"
-                                        onclick="search()">search
-                                </button>
-                                <button type="button" class="layui-btn layui-btn-normal" onclick="reset()">reset
-                                </button>
-                                <button type="button" class="layui-btn layui-btn-normal" onclick="add()">new</button>
+                            <label class="layui-form-label"> </label>
+                            <button type="button" class="layui-btn layui-btn-normal"
+                                    onclick="search()">search
+                            </button>
+                            <button type="button" class="layui-btn layui-btn-normal" onclick="reset()">reset
+                            </button>
+                            <button type="button" class="layui-btn layui-btn-normal" onclick="add()">new</button>
 
                         </div>
                     </div>
@@ -210,6 +224,7 @@
                             <th>No</th>
                             <th>username</th>
                             <th>password</th>
+                            <th>type</th>
                             <th>phone</th>
                             <th>email</th>
                             <%--                            <th>create date</th>--%>
@@ -260,7 +275,7 @@
                 shade: false,
                 maxmin: true,
                 area: ['893px', '600px'],
-                content: '<%=path%>/user/userDetail?id='+id
+                content: '<%=path%>/user/userDetail?id=' + id
             });
         }
     </script>

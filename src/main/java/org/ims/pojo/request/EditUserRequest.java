@@ -21,4 +21,6 @@ public class EditUserRequest {
     private String phone;
 
     private String email;
+
+    private Integer type;
 }

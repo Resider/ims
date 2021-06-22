@@ -73,7 +73,7 @@ public class UserServiceImpl implements UserService {
                 .setPhone(request.getPhone())
                 .setEmail(request.getEmail())
                 .setId(id)
-                .setType(0)
+                .setType(request.getType())
                 .setStatus(1)
                 .setIsDeleted(0);
         Long accountId = null;

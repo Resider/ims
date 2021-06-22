@@ -52,15 +52,18 @@
         <div class="layui-side-scroll">
 
             <ul class="layui-nav layui-nav-tree site-demo-nav">
-
-                <li class="layui-nav-item layui-nav-itemed">
-                    <a class="javascript:;" href="javascript:;">User Manager</a>
-                    <dl class="layui-nav-child">
-                        <dd>
-                            <a href="jsp/userList.jsp" target="body_iframe">用户管理</a>
-                        </dd>
-                    </dl>
-                </li>
+                <c:if test="${not empty sessionScope.user.type}">
+                    <c:if test="${sessionScope.user.type == 1}">
+                        <li class="layui-nav-item layui-nav-itemed">
+                            <a class="javascript:;" href="javascript:;">User Manager</a>
+                            <dl class="layui-nav-child">
+                                <dd>
+                                    <a href="jsp/userList.jsp" target="body_iframe">用户管理</a>
+                                </dd>
+                            </dl>
+                        </li>
+                    </c:if>
+                </c:if>
 
                 <li class="layui-nav-item layui-nav-itemed">
                     <a class="javascript:;" href="javascript:;">货物管理</a>
